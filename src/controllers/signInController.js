@@ -28,7 +28,7 @@ export async function signIn(req, res) {
             `, [token, user.id]
             );
 
-            return res.status(STATUS_CODE.OK).send(token);
+            return res.status(STATUS_CODE.OK).send({ token });
 
         }
 
