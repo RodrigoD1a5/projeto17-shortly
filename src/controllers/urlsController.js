@@ -48,6 +48,8 @@ export async function getUrlsById(req, res) {
 
         const [urls] = rows;
 
+        if (!urls) return res.sendStatus(STATUS_CODE.NOT_FOUND);
+
         const objectUrls = {
             id: urls.id,
             shortUrl: urls.shortUrl,
