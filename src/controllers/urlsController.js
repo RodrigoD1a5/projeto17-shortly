@@ -64,3 +64,26 @@ export async function getUrlsById(req, res) {
 
     }
 }
+
+export async function getOpenShortUrl(req, res) {
+    const { shortUrl } = req.params;
+
+    try {
+
+        const { rows } = await db.query('SELECT * FROM shortens WHERE "shortUrl" = $1', [shortUrl]);
+
+        const [url] = rows;
+
+        if (!url) return res.sendStatus(STATUS_CODE.NOT_FOUND);
+
+        await db.query('UPDATE shortens SET views = views + 1 WHERE id= $1', [url.id]);
+
+        res.redirect(url.url);
+
+    } catch (error) {
+
+        res.status(STATUS_CODE.SERVER_ERROR).send(error.message);
+
+    }
+
+}
