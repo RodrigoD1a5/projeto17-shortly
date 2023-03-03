@@ -27,7 +27,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.sessions (
     id integer NOT NULL,
     token text NOT NULL,
-    "userId" integer NOT NULL
+    "userId" integer NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -143,22 +144,12 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.sessions VALUES (1, 'bcf46a36-2cee-485a-8069-a652fcdffbbd', 1);
-INSERT INTO public.sessions VALUES (2, '108babac-c5c9-4b9e-b506-d2e8f9ac5423', 1);
-INSERT INTO public.sessions VALUES (3, '4136a319-58c6-4295-a59b-505a053b203b', 1);
-INSERT INTO public.sessions VALUES (4, '7e022907-de75-4d78-8fe3-97f748816332', 1);
-INSERT INTO public.sessions VALUES (5, '4c05ecd6-cd72-4d19-9905-65771706d519', 1);
-INSERT INTO public.sessions VALUES (6, 'cbe9462c-e32e-4c7c-b509-8c59f63ee796', 1);
-INSERT INTO public.sessions VALUES (7, 'c6611031-bc54-4ed3-83d5-c25d5c0b8aca', 1);
-INSERT INTO public.sessions VALUES (8, 'f31ec2a4-7544-4944-acb7-07e9ecd9626b', 1);
-INSERT INTO public.sessions VALUES (9, '5a6ed7a4-1531-407b-9425-66a24f273fb9', 1);
-INSERT INTO public.sessions VALUES (10, 'e607ae88-de7d-4b06-97ea-11c1d3c02b0e', 1);
-INSERT INTO public.sessions VALUES (11, 'ef7aba5c-a33a-4cbc-b7a0-ac377914d1f7', 1);
-INSERT INTO public.sessions VALUES (12, '4db2fd5a-a68c-40de-be28-774b09541b6a', 1);
-INSERT INTO public.sessions VALUES (13, '1644784d-eaa5-4d95-b0a6-99c74720fc1a', 1);
-INSERT INTO public.sessions VALUES (14, 'e75bf258-4778-434d-bbba-552f7c499f8f', 1);
-INSERT INTO public.sessions VALUES (15, '7058decb-28dc-463a-9e06-8068d212d8f2', 2);
-INSERT INTO public.sessions VALUES (16, '9631997c-c874-428a-a513-828cb11068d0', 2);
+INSERT INTO public.sessions VALUES (1, '521c7711-f81d-412f-991b-78548674d7fd', 2, '2023-03-03 13:28:56.402797');
+INSERT INTO public.sessions VALUES (2, 'a4616522-899c-4d0e-882e-996083ffa218', 2, '2023-03-03 13:30:23.148393');
+INSERT INTO public.sessions VALUES (3, '5b176172-e350-4116-86b5-b56cf3ad0517', 1, '2023-03-03 13:35:07.704631');
+INSERT INTO public.sessions VALUES (4, '18671e39-13c1-4fc7-949e-c43dcef07f98', 1, '2023-03-03 13:35:08.422666');
+INSERT INTO public.sessions VALUES (5, '1f9ea581-4e4b-446d-87a5-29839541abf2', 1, '2023-03-03 13:35:09.059021');
+INSERT INTO public.sessions VALUES (6, '8becfbec-ed01-40f2-8cc2-2b08c3ac4df3', 2, '2023-03-03 13:35:14.960301');
 
 
 --
@@ -168,6 +159,10 @@ INSERT INTO public.sessions VALUES (16, '9631997c-c874-428a-a513-828cb11068d0', 
 INSERT INTO public.shortens VALUES (1, 'https://...', 'GPz_8Z1V', 1, 5, '2023-03-02 21:22:27.475749');
 INSERT INTO public.shortens VALUES (3, 'https://www.globo.com', 'VfYiro0f', 1, 2, '2023-03-03 10:16:01.902484');
 INSERT INTO public.shortens VALUES (4, 'https://twitter.com/i/flow/login', 'Wp9icA2e', 2, 3, '2023-03-03 11:21:06.769074');
+INSERT INTO public.shortens VALUES (5, 'https://twitter.com/i/flow/login', 'oNbLQid7', 2, 0, '2023-03-03 13:07:49.11656');
+INSERT INTO public.shortens VALUES (6, 'https://twitter.com/i/flow/login', 'mBnVXqnW', 2, 0, '2023-03-03 13:29:07.944719');
+INSERT INTO public.shortens VALUES (7, 'https://twitter.com/i/flow/login', 'CsMJysPZ', 2, 0, '2023-03-03 13:29:54.827962');
+INSERT INTO public.shortens VALUES (8, 'https://twitter.com/i/flow/login', 'l6xU0cbS', 2, 0, '2023-03-03 13:30:28.550076');
 
 
 --
@@ -182,14 +177,14 @@ INSERT INTO public.users VALUES (2, 'rodrigo@driven.com.br', '$2b$10$nROqe.TGBSE
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 16, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 6, true);
 
 
 --
 -- Name: shortens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.shortens_id_seq', 4, true);
+SELECT pg_catalog.setval('public.shortens_id_seq', 8, true);
 
 
 --
