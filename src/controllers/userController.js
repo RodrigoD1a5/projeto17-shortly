@@ -26,7 +26,17 @@ export async function getUserById(req, res) {
 
         const { rows: [visitCount] } = await db.query('SELECT SUM(views) FROM shortens WHERE "userId"=$1', [user.id]);
 
-        const { rows: shortenedUrls } = await db.query('SELECT * FROM shortens WHERE "userId"=$1', [user.id]);
+        const { rows: shortenedUrls } = await db.query(`
+            SELECT 
+                id, 
+                "shortUrl", 
+                url, 
+                views AS "visitCount" 
+            FROM shortens 
+            WHERE "userId"=$1`
+            , [user.id]
+        );
+
 
         const object = {
 
