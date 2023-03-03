@@ -38,3 +38,27 @@ export async function postUrlShorten(req, res) {
     }
 
 }
+
+export async function getUrlsById(req, res) {
+    const { id } = req.params;
+
+    try {
+
+        const { rows } = await db.query('SELECT * FROM shortens WHERE id = $1', [id]);
+
+        const [urls] = rows;
+
+        const objectUrls = {
+            id: urls.id,
+            shortUrl: urls.shortUrl,
+            url: urls.url
+        };
+
+        res.status(STATUS_CODE.OK).send(objectUrls);
+
+    } catch (error) {
+
+        res.status(STATUS_CODE.SERVER_ERROR).send(error.message);
+
+    }
+}
