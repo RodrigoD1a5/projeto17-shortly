@@ -87,3 +87,42 @@ export async function getOpenShortUrl(req, res) {
     }
 
 }
+
+export async function deleteUrlsById(req, res) {
+    const { id } = req.params;
+
+    const { authorization } = req.headers;
+
+    if (!authorization) return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+
+    const token = authorization?.replace('Bearer ', "");
+
+    if (!token) return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+
+    try {
+
+        const { rows } = await db.query('SELECT * FROM sessions WHERE token = $1', [token]);
+
+        const [user] = rows;
+
+        if (!user) return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+
+        const { rows: shortens } = await db.query('SELECT * FROM shortens WHERE id = $1', [id]);
+
+        const [url] = shortens;
+
+        if (!url) return res.sendStatus(STATUS_CODE.NOT_FOUND);
+
+        if (user.userId != url.userId) return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+
+        await db.query('DELETE FROM shortens WHERE id= $1', [id]);
+
+        res.sendStatus(STATUS_CODE.NO_CONTENT);
+
+    } catch (error) {
+
+        res.status(STATUS_CODE.SERVER_ERROR).send(error.message);
+
+    }
+
+}

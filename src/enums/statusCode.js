@@ -8,6 +8,7 @@ const STATUS_CODE = Object.freeze({
     CONFLICT: 409,
     UNPROCESSABLE_ENTITY: 422,
     SERVER_ERROR: 500,
+    NO_CONTENT: 204
 });
 
 export { STATUS_CODE };

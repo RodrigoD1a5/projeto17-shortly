@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { signUpRouter } from "./routes/signUpRouter.js";
 import { signInRouter } from "./routes/signInRouter.js";
 import { urlsRouter } from "./routes/urlsRouter.js";
+import { userRouter } from "./routes/userRouter.js";
 
 dotenv.config();
 
@@ -15,5 +16,6 @@ app.use(json());
 app.use(signUpRouter);
 app.use(signInRouter);
 app.use(urlsRouter);
+app.use(userRouter);
 
 app.listen(process.env.PORT, () => console.log(`Servidor funcionando na porta ${process.env.PORT}`));
