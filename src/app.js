@@ -5,6 +5,7 @@ import { signUpRouter } from "./routes/signUpRouter.js";
 import { signInRouter } from "./routes/signInRouter.js";
 import { urlsRouter } from "./routes/urlsRouter.js";
 import { userRouter } from "./routes/userRouter.js";
+import { rankingRouter } from "./routes/rankingRouter.js";
 
 dotenv.config();
 
@@ -17,5 +18,6 @@ app.use(signUpRouter);
 app.use(signInRouter);
 app.use(urlsRouter);
 app.use(userRouter);
+app.use(rankingRouter);
 
 app.listen(process.env.PORT, () => console.log(`Servidor funcionando na porta ${process.env.PORT}`));
