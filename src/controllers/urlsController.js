@@ -7,6 +7,7 @@ export async function postUrlShorten(req, res) {
 
     const { authorization } = req.headers;
 
+
     if (!authorization) return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
 
     const token = authorization?.replace('Bearer ', "");
@@ -29,7 +30,10 @@ export async function postUrlShorten(req, res) {
         `, [url, shortUrl, sesssion.userId]
         );
 
-        res.status(STATUS_CODE.CREATED).send({ shortUrl });
+        const { rows: [shortUrlId] } = await db.query('SELECT * FROM shortens WHERE "shortUrl"=$1', [shortUrl]);
+
+
+        res.status(STATUS_CODE.CREATED).send({ id: shortUrlId.id, shortUrl });
 
     } catch (error) {
 
